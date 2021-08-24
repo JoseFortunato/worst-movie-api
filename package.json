@@ -1,0 +1,33 @@
+{
+  "name": "worst-movie-api",
+  "version": "1.0.0",
+  "description": "Worst movei API for Texto IT",
+  "main": "api.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "seed": "node database/seeders/seed.js",
+    "test": "jest --runInBand --forceExit --bail --testTimeout=30000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/JoseFortunato/worst-movie-api.git"
+  },
+  "author": "José Fortunato",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoseFortunato/worst-movie-api/issues"
+  },
+  "homepage": "https://github.com/JoseFortunato/worst-movie-api#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "sequelize": "^6.6.5",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "csv-parser": "^3.0.0",
+    "jest": "^27.0.6",
+    "nodemon": "^2.0.12",
+    "sequelize-cli": "^6.2.0",
+    "supertest": "^6.1.6"
+  }
+}
