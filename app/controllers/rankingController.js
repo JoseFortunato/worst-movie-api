@@ -1,6 +1,10 @@
 'use strict';
 
-const { Movie, MoviesProducer, StudiosMovie } = require('../models');
+/*
+TODO - Implement query params by years
+*/
+
+const { Movie } = require('../models');
 
 const ranking = (movies) => {
 
@@ -15,7 +19,7 @@ const ranking = (movies) => {
       }
       else {
         winners[parseInt(producer.dataValues.producerId)] = {
-          producer: producer.dataValues.producerId,
+          producer: producer.dataValues.producer,
           interval: null,
           previousWin: null,
           followingWin: movie.year
@@ -48,8 +52,7 @@ exports.get = async (req, res, next) => {
     });
 
     if (movies) {
-      const producers = ranking(movies);
-      res.status(200).send(producers);
+      res.status(200).send(ranking(movies));
     }
     else {
       res.status(400).send({message: "Failed to find a movie."});

@@ -1,7 +1,8 @@
 'use strict';
 
 const request = require('supertest')
-const app = require('../index.js');
+const app = require('../app/app.js');
+let producerId = null;
 
 describe('GET /producers', () => {
   it('respond with json containing a list of all producers', (done) => {
@@ -16,7 +17,7 @@ describe('GET /producers', () => {
 
   it('respond with json containing a producer', (done) => {
     request(app)
-    .get('/producers/833')
+    .get('/producers/1')
     .set('Accept', 'application/json')
     .then((response) => {
       expect(response.statusCode).toEqual(200);
@@ -30,6 +31,7 @@ describe('GET /producers', () => {
     .send({name: "Producer test"})
     .set('Accept', 'application/json')
     .then((response) => {
+      producerId = response.body.producerId
       expect(response.statusCode).toEqual(201);
       done();
     });
@@ -37,8 +39,18 @@ describe('GET /producers', () => {
 
   it('Update a producer', (done) => {
     request(app)
-    .put('/producers/833')
+    .put(`/producers/${producerId}`)
     .send({title: "Producer test 2"})
+    .set('Accept', 'application/json')
+    .then((response) => {
+      expect(response.statusCode).toEqual(200);
+      done();
+    });
+  });
+
+  it('Delete a producer', (done) => {
+    request(app)
+    .delete(`/producers/${producerId}`)
     .set('Accept', 'application/json')
     .then((response) => {
       expect(response.statusCode).toEqual(200);

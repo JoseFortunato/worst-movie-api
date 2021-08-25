@@ -1,16 +1,16 @@
 {
   "name": "worst-movie-api",
   "version": "1.0.0",
-  "description": "Worst movei API for Texto IT",
+  "description": "Worst movei API for Texo IT",
   "main": "api.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon server.js",
     "seed": "node database/seeders/seed.js",
-    "test": "jest --runInBand --forceExit --bail --testTimeout=30000"
+    "test": "jest --collectCoverage"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://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@github.com/JoseFortunato/worst-movie-api.git"
+    "url": "https://github.com/JoseFortunato/worst-movie-api.git"
   },
   "author": "José Fortunato",
   "license": "ISC",

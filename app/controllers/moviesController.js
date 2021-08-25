@@ -1,5 +1,10 @@
 'use strict';
 
+/*
+TODO - Test values in post and put methods
+TODO - Validate query params where
+*/
+
 const { Movie, MoviesProducer, StudiosMovie } = require('../models');
 
 exports.post = async (req, res, next) => {
@@ -27,12 +32,20 @@ exports.post = async (req, res, next) => {
 exports.getAll = async (req, res, next) => {
   try {
     const movies = await Movie.findAll({
+      where: (req.query.where) ? JSON.parse(req.query.where) : {},
+      offset: (req.query.page) ? req.query.page : 0,
+      limit: (req.query.size) ? req.query.size : 10,
       include: ['studios', 'producers']
     });
 
-    res.status(200).send(movies);
-
+    if (movies) {
+      res.status(200).send(movies);
+    }
+    else {
+      return res.status(400).send({message: "Failed to get movies."});
+    }
   } catch (e) {
+    console.log(e);
     return res.status(400).send({message: "Failed to get movies."});
   }
 };
@@ -44,14 +57,14 @@ exports.get = async (req, res, next) => {
     });
 
     if (movie) {
-      res.status(200).send({statusCode: 200, data: movie.dataValues});
+      res.status(200).send(movie.dataValues);
     }
     else {
-      res.status(400).send({statusCode: 400, data: "Failed to find a movie."});
+      res.status(400).send({message: "Failed to find a movie."});
     }
   } catch (e) {
     console.log(e);
-    res.status(400).send({statusCode: 400, data: "Failed to find a movie."});
+    res.status(400).send({message: "Failed to find a movie."});
   }
 };
 
@@ -79,7 +92,8 @@ exports.delete = async (req, res, next) => {
     const result = await Movie.destroy({
       where: {
         id: req.params.id
-      }
+      },
+      include: ['studios', 'producers']
     });
 
     if (result) {
@@ -89,6 +103,7 @@ exports.delete = async (req, res, next) => {
       res.status(400).send({message: "Failed to delete movie."});
     }
   } catch (e) {
+    console.log(e);
     res.status(400).send({message: "Failed to delete movie."});
   }
 };

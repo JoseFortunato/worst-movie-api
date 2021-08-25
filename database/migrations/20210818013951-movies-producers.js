@@ -11,12 +11,13 @@ module.exports = {
         type: DataTypes.INTEGER,
       },
       movieId: {
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.INTEGER,
         references: {
           model: 'Movies',
           key: 'id'
-        }
+        },
+        onDelete: 'cascade'
       },
       producerId: {
         allowNull: false,
