@@ -5,5 +5,9 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
   });
 
+  Studio.associate = (models) => {
+    Studio.belongsToMany(models.Movie, {through: 'StudiosMovies', foreignKey: 'studioId', as: 'studios'})
+  };
+
   return Studio;
 }
