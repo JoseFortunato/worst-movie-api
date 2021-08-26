@@ -21,8 +21,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "sequelize": "^6.6.5",
-    "sqlite3": "^5.0.2",
-     "tar": ">=3.2.3"
+    "sqlite3": "^5.0.2"
   },
   "devDependencies": {
     "csv-parser": "^3.0.0",
