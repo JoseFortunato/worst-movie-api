@@ -1,10 +1,12 @@
 # worst-movie-api
 
 RESTful API for reading the list of nominees and winners in the Worst Film category at the Golden Raspberry Awards.
+
 This api use node: v14.16.1
+
 In the files folder there is an Insomnia file with all routes and examples of requests.
 
-#Build Setup
+# Build Setup
 
 ```bash
 # Install the dependecies
