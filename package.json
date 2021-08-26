@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "seed": "node database/seeders/seed.js",
-    "test": "jest --collectCoverage"
+    "tests": "jest --collectCoverage"
   },
   "repository": {
     "type": "git",

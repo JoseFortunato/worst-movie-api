@@ -1,21 +1,24 @@
 # worst-movie-api
 
 RESTful API for reading the list of nominees and winners in the Worst Film category at the Golden Raspberry Awards.
-This api use node version: v14.16.1
+This api use node: v14.16.1
+In the files folder there is an Insomnia file with all routes and examples of requests.
 
-First install the dependecies
+#Build Setup
 
-    npm install
+```bash
+# Install the dependecies
+$ npm install
 
-To start and pupulate database:
+# Create database file:
+$ npx sequelize db:migrate
 
-    npx sequelize db:migrate
-    npm run seed
+# Pupulate database passing the csv with movies:
+$ npm run seed --file="./database/seeders/movielist.csv"
 
-To run tests:
+# Run tests:
+$ npm run tests
 
-    npm run tests
-
-To run server:
-
-    npm start
+# Run server:
+$ npm start
+```

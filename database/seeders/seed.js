@@ -80,8 +80,12 @@ const getStudios = async (studios) => {
 
 }
 
+if (!fs.existsSync(process.env.npm_config_file)) {
+  console.error('File not found.');
+  process.exit();
+}
 
-fs.createReadStream(__dirname + '/movielist.csv')
+fs.createReadStream(process.env.npm_config_file)
   .pipe(csv({ separator: ';' }))
   .on('data', (data) => movies.push(data))
   .on('end', async () => {
