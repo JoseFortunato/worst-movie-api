@@ -8,7 +8,8 @@ const { Movie } = require('../models');
 
 const ranking = (movies) => {
 
-  let winners = [];
+  const winners = [];
+  let producers = [];
 
   for (const movie of movies) {
     for (const producer of movie.producers) {
@@ -16,6 +17,7 @@ const ranking = (movies) => {
         winners[producer.dataValues.producerId].interval = movie.year - winners[producer.dataValues.producerId].followingWin;
         winners[producer.dataValues.producerId].previousWin = winners[producer.dataValues.producerId].followingWin;
         winners[producer.dataValues.producerId].followingWin = movie.year;
+        producers.push({...winners[producer.dataValues.producerId]});
       }
       else {
         winners[parseInt(producer.dataValues.producerId)] = {
@@ -28,12 +30,12 @@ const ranking = (movies) => {
     }
   }
 
-  winners = winners.filter(winner => winner.interval).sort((a, b) => {
+  producers = producers.filter(winner => winner.interval).sort((a, b) => {
     return a.interval - b.interval;
   });
 
-  const min = winners.filter(winner => winner.interval === winners[0].interval);
-  const max = winners.filter(winner => winner.interval === winners[winners.length - 1].interval);
+  const min = producers.filter(winner => winner.interval === producers[0].interval);
+  const max = producers.filter(winner => winner.interval === producers[producers.length - 1].interval);
 
   return {
     min: min,
